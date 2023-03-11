@@ -1,5 +1,6 @@
-node {
-    def app
+pipeline {
+    agent any
+    def dockerImage
 
     stage('Clone repository') {
       
@@ -9,13 +10,13 @@ node {
 
     stage('Build image') {
   
-       app = docker.build("mahshaban95/autograder-jenkins")
+       dockerImage = docker.build("mahshaban95/autograder-jenkins")
     }
 
     stage('Push image') {
         
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            app.push("${env.BUILD_NUMBER}")
+            dockerImage.push("${env.BUILD_NUMBER}")
         }
     }
     
