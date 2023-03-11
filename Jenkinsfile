@@ -10,7 +10,7 @@ pipeline {
         stage('Build image') {
             steps{
                 script{
-                    def dockerImage dockerImage = docker.build("mahshaban95/autograder-jenkins")
+                    def dockerImage = docker.build("mahshaban95/autograder-jenkins")
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         dockerImage.push("${env.BUILD_NUMBER}")
                     }
