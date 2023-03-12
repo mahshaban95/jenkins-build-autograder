@@ -2,7 +2,12 @@ pipeline {
     agent any
     stages{
         stage('Clone repository') {
-            checkout scm
+            steps{
+                script{
+                    checkout scm
+                }
+
+            }
         }
 
         stage('Build image') {
